@@ -761,17 +761,17 @@ namespace TestAndroid.Models
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(YML.yml_catalog));
                 XmlDocument xmlDoc = new XmlDocument();
-                try {
-                    xmlDoc.Load(url);
-                    using (TextReader reader = new StringReader(xmlDoc.OuterXml))
-                    {
-                        result = (YML.yml_catalog)serializer.Deserialize(reader);
-                    }
-                } catch
+                try
                 {
-                    result = null;
+                    xmlDoc.Load(url);
+                    using TextReader reader = new StringReader(xmlDoc.OuterXml);
+                    result = (YML.yml_catalog)serializer.Deserialize(reader);
                 }
-                return result.shop.offers.ToList();                   
+                catch
+                {
+                    return null;
+                }
+                return result.shop.offers.ToList();
             });
             return null;
         }
